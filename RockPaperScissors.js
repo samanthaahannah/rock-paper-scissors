@@ -68,7 +68,6 @@ function playRound(humanChoice, computerChoice){
         }
         else if (computerChoice == "paper"){
             console.log("Scissors beats paper! You win this round!");
-            humanScore += 1
             return humanScore += 1;
         }
         break;
@@ -89,9 +88,10 @@ function playRound(humanChoice, computerChoice){
 }
 
 function playGame(){
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 5; ++i) {
+        const humanSelection = getHumanChoice();
+        const computerSelection = getComputerChoice();
         playRound(humanSelection, computerSelection);
-        getHumanChoice();
     }
 }
 
@@ -113,8 +113,7 @@ function scoreState(){
     }
 }
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
+
 
 let humanScore = 0;
 let computerScore = 0;
