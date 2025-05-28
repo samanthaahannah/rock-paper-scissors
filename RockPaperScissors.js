@@ -1,8 +1,19 @@
-const humanMsg = document.createElement('div');
-const computerMsg = document.createElement('div');
-const roundMsg = document.createElement('div');
+const choices = document.querySelector('.container');
 
-let choices = document.querySelector('.container');
+const humanMsg = document.createElement('div');
+humanMsg.setAttribute("id", "humanMsg");
+
+const computerMsg = document.createElement('div');
+computerMsg.setAttribute("id", "computerMsg");
+
+const roundMsg = document.createElement('div');
+roundMsg.setAttribute("id", "roundMsg");
+
+const endMsg = document.createElement('div');
+endMsg.setAttribute("id", "endMsg");
+
+const statsMsg = document.createElement('div');
+statsMsg.setAttribute("id", "statsMsg");
 
 function getComputerChoice(){
     let computerNumber = Math.random();
@@ -80,67 +91,86 @@ function playRound(humanChoice, computerChoice){
         }
         break;
     }
+
 }
 
 function playGame(){
+        choices.addEventListener('click', (event) => {  
+            let target = event.target;
+            let humanChoice = '';
+            let computerSelection = getComputerChoice();
 
-    
-    choices.addEventListener('click', (event) => {
+            switch(target.id){
+                case 'rock':
+                    
+                        humanChoice = 'rock';
+                        humanMsg.textContent = "You picked rock!";
+                        choices.appendChild(humanMsg);
+                        playRound(humanChoice, computerSelection);
+                    break;
+                case 'paper':
+                    
+                        humanChoice = 'paper';
+                        humanMsg.textContent = "You picked paper!";
+                        choices.appendChild(humanMsg);
+                        playRound(humanChoice, computerSelection);
+                    break;
+                case 'scissors':
+                    
+                        humanChoice = 'scissors';
+                        humanMsg.textContent = "You picked scissors!";
+                        choices.appendChild(humanMsg);
+                        playRound(humanChoice, computerSelection);
 
-    let target = event.target;
-    let humanChoice = '';
-    let computerSelection = getComputerChoice();
-
-
-    switch(target.id){
-        case 'rock':
-            humanMsg.textContent = "You picked rock!";
-            choices.appendChild(humanMsg);
-            humanChoice = 'rock';
-            playRound(humanChoice, computerSelection);
-            break;
-        case 'paper':
-            humanMsg.textContent = "You picked paper!";
-            choices.appendChild(humanMsg);
-            humanChoice = 'paper';
-            playRound(humanChoice, computerSelection);
-            break;
-        case 'scissors':
-            humanMsg.textContent = "You picked scissors!";
-            choices.appendChild(humanMsg);
-            humanChoice = 'scissors';
-            playRound(humanChoice, computerSelection);
-            break;
-        default:
-    }
-});
-    
+                    break;
+                default:
+                    
+            }
+            console.log("Human: "+humanScore);
+            console.log("Computer: "+computerScore); 
+            disableButtons();
+    });
 }
 
-/*function scoreState(){
-    stringWin = "You won the game! Congrats!";
-    stringLose = "You lost! Sorry!";
+function disableButtons(){
+    if (humanScore >= 5 || computerScore >= 5){
+        document.getElementById('rock').disabled = true;
+        document.getElementById('paper').disabled = true;
+        document.getElementById('scissors').disabled = true;
+        scoreState();
+    }
+}
+
+function scoreState(){
+    choices.removeChild(humanMsg);
+    choices.removeChild(roundMsg);
+    choices.removeChild(computerMsg);
+    let stringWin = "You won the game! Congrats!";
+    let stringLose = "You lost! Sorry!";
     stringDraw = "It was a draw! Nobody won!";
 
-    alert("Your score is "+humanScore+" and computer's score is "+computerScore+".");
+    statsMsg.textContent = "Your score is "+humanScore+" and computer's score is "+computerScore+".";
+    choices.appendChild(statsMsg);
+
 
     if (humanScore > computerScore){
-        alert(stringWin);
+        endMsg.textContent = stringWin;
+        choices.appendChild(endMsg);
     }
     else if (humanScore < computerScore){
-        alert(stringLose);
-    }
+        endMsg.textContent = stringLose;
+        choices.appendChild(endMsg);    }
     else{
-        alert(stringDraw);
-    }
-}*/
-
+        endMsg.textContent = stringDraw;
+        choices.appendChild(endMsg);    }
+}
 
 
 let humanScore = 0;
 let computerScore = 0;
 
 playGame();
+
 
 
 
