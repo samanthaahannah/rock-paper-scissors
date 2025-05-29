@@ -1,30 +1,28 @@
-const choices = document.querySelector('.container');
+const main = document.querySelector('.container');
+
+const text = document.createElement('div');
+text.setAttribute("id", "text");
+main.appendChild(text);
 
 const humanMsg = document.createElement('div');
 humanMsg.setAttribute("id", "humanMsg");
-choices.appendChild(humanMsg);
-
+text.appendChild(humanMsg);
 
 const computerMsg = document.createElement('div');
 computerMsg.setAttribute("id", "computerMsg");
-choices.appendChild(computerMsg);
-document.getElementById('computerMsg').disabled = true;
-
-
+text.appendChild(computerMsg);
 
 const roundMsg = document.createElement('div');
 roundMsg.setAttribute("id", "roundMsg");
-choices.appendChild(roundMsg);
-
-
-const endMsg = document.createElement('div');
-endMsg.setAttribute("id", "endMsg");
-choices.appendChild(endMsg);
-
+text.appendChild(roundMsg);
 
 const statsMsg = document.createElement('div');
 statsMsg.setAttribute("id", "statsMsg");
-choices.appendChild(statsMsg);
+text.appendChild(statsMsg);
+
+const endMsg = document.createElement('div');
+endMsg.setAttribute("id", "endMsg");
+text.appendChild(endMsg);
 
 
 function getComputerChoice(){
@@ -95,7 +93,7 @@ function playRound(humanChoice, computerChoice){
 }
 
 function playGame(){
-        choices.addEventListener('click', (event) => {  
+        main.addEventListener('click', (event) => {  
             let target = event.target;
             let humanChoice = '';
             let computerSelection = "";
