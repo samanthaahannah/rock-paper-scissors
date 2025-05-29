@@ -4,26 +4,33 @@ const text = document.createElement('div');
 text.setAttribute("id", "text");
 main.appendChild(text);
 
-const humanMsg = document.createElement('div');
+let humanMsg = document.createElement('div');
 humanMsg.setAttribute("id", "humanMsg");
 text.appendChild(humanMsg);
 
-const computerMsg = document.createElement('div');
+let computerMsg = document.createElement('div');
 computerMsg.setAttribute("id", "computerMsg");
 text.appendChild(computerMsg);
 
-const roundMsg = document.createElement('div');
+let roundMsg = document.createElement('div');
 roundMsg.setAttribute("id", "roundMsg");
 text.appendChild(roundMsg);
 
-const statsMsg = document.createElement('div');
+let statsMsg = document.createElement('div');
 statsMsg.setAttribute("id", "statsMsg");
 text.appendChild(statsMsg);
 
-const endMsg = document.createElement('div');
+let endMsg = document.createElement('div');
 endMsg.setAttribute("id", "endMsg");
 text.appendChild(endMsg);
 
+const buttonWrapper = document.createElement('div');
+buttonWrapper.setAttribute("id", "buttonWrapper");
+main.appendChild(buttonWrapper);
+
+const replayButton = document.createElement('button');
+replayButton.setAttribute("id","replay");
+replayButton.textContent ="Play again?";
 
 function getComputerChoice(){
     let computerNumber = Math.random();
@@ -121,8 +128,6 @@ function playGame(){
                 default:
                     
             }
-            console.log("Human: "+humanScore);
-            console.log("Computer: "+computerScore); 
             disableButtons();
     });
 }
@@ -133,6 +138,10 @@ function disableButtons(){
         document.getElementById('paper').disabled = true;
         document.getElementById('scissors').disabled = true;
         scoreState();
+    } else {
+        document.getElementById('rock').disabled = false;
+        document.getElementById('paper').disabled = false;
+        document.getElementById('scissors').disabled = false;
     }
 }
 
@@ -150,11 +159,25 @@ function scoreState(){
 
     if (humanScore > computerScore){
         endMsg.textContent = stringWin;
+        buttonWrapper.appendChild(replayButton);
+        replay();
+    
     }else if (humanScore < computerScore){
         endMsg.textContent = stringLose;
+        buttonWrapper.appendChild(replayButton);
+        replay();
+    
     }else{
         endMsg.textContent = stringDraw;
+        buttonWrapper.appendChild(replayButton);
+        replay();
     }
+}
+
+function replay(){
+  document.getElementById('replay').addEventListener('click', (event) => { 
+    window.location.reload();
+  });
 }
 
 
